@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun By HTML - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { display: block; height: auto; overflow: auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .topbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: rgba(13,17,23,0.6); }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; }
+        .brand img { height: 36px; }
+        .topbar a { color: #ff8c00; text-decoration: none; font-weight: 600; }
+        .hero { text-align: center; padding: 70px 20px 30px; }
+        .hero h1 { font-size: 50px; border: none; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); margin-bottom: 10px; }
+        .hero p { color: #eee; font-size: 20px; margin-bottom: 35px; }
+        .cards { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 0 20px 30px; }
+        .card { background: white; color: #333; padding: 30px; border-radius: 12px; width: 260px; text-decoration: none; text-align: center; font-weight: bold; font-size: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); background: #ff8c00; color: white; }
+        .card span { display: block; font-size: 40px; margin-bottom: 10px; }
+        .btn-exam { background: #ff8c00; color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-size: 20px; font-weight: bold; margin: 10px 0 50px; display: inline-block; box-shadow: 0 5px 15px rgba(255,140,0,0.4); transition: 0.3s; }
+        .btn-exam:hover { background: #e67e00; transform: scale(1.05); }
+        .dev { text-align: center; padding: 40px 20px 60px; background: rgba(255,255,255,0.1); }
+        .dev h2 { font-size: 32px; margin-bottom: 20px; color: #fff; }
+        .dev img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; margin-bottom: 15px; }
+        .dev p { max-width: 650px; margin: 0 auto; color: #f0f0f0; line-height: 1.8; }
+        footer { text-align: center; padding: 20px; color: #eee; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="brand"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"> Fun By HTML</div>
+        <a href="{{ url_for('admin') }}">Admin</a>
+    </div>
+    <div class="hero">
+        <h1>Welcome to Fun By HTML</h1>
+        <p>Learn HTML, CSS, and JavaScript with simple examples and open code</p>
+        <div class="cards">
+            <a href="/html/01-introduction.html" class="card"><span>🌐</span> HTML Syllabus</a>
+            <a href="/css/01-introduction.html" class="card"><span>🎨</span> CSS Syllabus</a>
+            <a href="/js/01-introduction.html" class="card"><span>⚡</span> JS Syllabus</a>
+        </div>
+        <a href="{{ url_for('exam_form') }}" class="btn-exam">📝 Fill Exam Form &amp; Get Marksheet</a>
+    </div>
+
+    <section class="dev">
+        <h2>Developer</h2>
+        <img src="{{ url_for('static', filename='images/developer.jpg') }}" alt="Raj Gautam">
+        <p><strong>Raj Gautam</strong> — Developer &amp; Founder of Fun By HTML. This project helps students learn web development through clear topics, examples, and an exam/marksheet workflow.</p>
+    </section>
+
+    <footer>&copy; 2026 Fun By HTML. All rights reserved.</footer>
+</body>
+</html>

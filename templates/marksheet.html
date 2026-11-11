@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marksheet - {{ name }}</title>
+    <style>
+        body { background: #e0e0e0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 30px; font-family: 'Times New Roman', Times, serif; margin: 0; }
+        .marksheet { background: #fff; width: 100%; max-width: 850px; padding: 30px; border: 3px solid #1a3c8a; outline: 2px solid #d4af37; outline-offset: 5px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .marksheet::before { content: "FUN BY HTML"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 90px; color: rgba(0,0,0,0.03); font-weight: bold; z-index: 0; white-space: nowrap; pointer-events: none; }
+        .header { text-align: center; border-bottom: 2px solid #1a3c8a; padding-bottom: 15px; margin-bottom: 20px; position: relative; z-index: 1; }
+        .header h1 { color: #1a3c8a; font-size: 26px; margin: 0; text-transform: uppercase; }
+        .header p { margin: 5px 0; font-size: 12px; color: #333; }
+        .header h2 { background: #1a3c8a; color: white; display: inline-block; padding: 5px 20px; margin-top: 10px; font-size: 18px; }
+        .student-details { display: grid; grid-template-columns: 1fr auto; gap: 20px; font-size: 14px; margin-bottom: 20px; position: relative; z-index: 1; }
+        .student-details p { margin: 6px 0; }
+        .student-details span { font-weight: bold; }
+        .photo-box { width: 90px; height: 110px; border: 1px solid #000; display: flex; justify-content: center; align-items: center; font-size: 10px; background: #f9f9f9; overflow: hidden; }
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; position: relative; z-index: 1; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: center; font-size: 13px; }
+        th { background: #1a3c8a; color: white; }
+        td { background: #fdfdfd; }
+        .total-row td { font-weight: bold; background: #eee; }
+        .footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 40px; position: relative; z-index: 1; }
+        .signature { text-align: center; border-top: 1px solid #000; padding-top: 5px; width: 150px; font-size: 12px; font-weight: bold; }
+        .grade { font-size: 16px; font-weight: bold; color: #1a3c8a; margin-top: 10px; }
+        .actions { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 10; }
+        .print-btn, .back-btn { padding: 12px 20px; border: none; border-radius: 5px; font-size: 14px; font-weight: bold; cursor: pointer; text-decoration: none; color: white; }
+        .print-btn { background: #ff8c00; }
+        .back-btn { background: #1a3c8a; }
+        @media print { body { background: white; padding: 0; } .marksheet { border: none; box-shadow: none; outline: none; max-width: 100%; } .actions { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="marksheet">
+        <div class="header">
+            <h1>FUN BY HTML TECH &amp; PROGRAMMING</h1>
+            <p>Computer Education, Software &amp; Hardware, Coaching &amp; Training Centre</p>
+            <h2>Marksheet</h2>
+        </div>
+
+        <div class="student-details">
+            <div>
+                <p>Student Name : <span>{{ name }}</span></p>
+                <p>Roll No : <span>{{ roll }}</span></p>
+                <p>Course Name : <span>{{ course }}</span></p>
+                <p>Date of Birth : <span>{{ dob }}</span></p>
+                <p>Session : <span>2026</span></p>
+            </div>
+            <div class="photo-box"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"></div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>SLNO</th>
+                    <th>SUBJECT</th>
+                    <th>TOTAL MARKS</th>
+                    <th>OBTAIN MARKS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in marks_data %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ item.subject }}</td>
+                    <td>100</td>
+                    <td>{{ item.marks }}</td>
+                </tr>
+                {% endfor %}
+                <tr class="total-row">
+                    <td colspan="2">Total</td>
+                    <td>{{ total_marks }}</td>
+                    <td>{{ total_obtained }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <p>Percentage : <strong>{{ percentage }}%</strong></p>
+            <p class="grade">Grade : {{ grade }}</p>
+        </div>
+
+        <div class="footer">
+            <div class="signature">Director</div>
+            <div class="signature">Verified</div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="{{ url_for('home') }}" class="back-btn">← Home</a>
+        <button class="print-btn" onclick="window.print()">🖨️ Print / Download</button>
+    </div>
+</body>
+</html>
